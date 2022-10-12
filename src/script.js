@@ -27,24 +27,42 @@ const scene = new THREE.Scene()
 /**
  * Galaxy
  */
-const parameters = {}
-parameters.count = 1000
-parameters.size = .02
+const parameters = {
+    count: 100000,
+    size: .01,
+    radius: 5,
+    branches: 3,
+
+}
+
+let geometry;
+let material;
+let points;
 
 const generateGalaxy = () => {
-    const { count, size, } = parameters
+    const { count, size, radius, branches, } = parameters
+
+    if(points) {
+        geometry.dispose()
+        material.dispose()
+        scene.remove(points)
+    }
 
     /**
      * Geometry
      */
-    const geometry = new THREE.BufferGeometry()
+    geometry = new THREE.BufferGeometry()
     const positions = new Float32Array(count * 3)
     
     for (let i = 0; i < count; i++) {
+
         const i3 = i * 3
-        positions[i3 + 0] = (Math.random() - .5) * 3
-        positions[i3 + 1] = (Math.random() - .5) * 3
-        positions[i3 + 2] = (Math.random() - .5) * 3
+
+        const branchAngle = (i % branches) / branches * Math.PI * 2
+
+        positions[i3 + 0] = Math.cos(branchAngle) * radius
+        positions[i3 + 1] = 0
+        positions[i3 + 2] = Math.sin(branchAngle) * radius
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -52,7 +70,7 @@ const generateGalaxy = () => {
     /**
      * Material
      */
-    const material = new THREE.PointsMaterial({
+    material = new THREE.PointsMaterial({
         size,
         sizeAttenuation: true,
         depthWrite: false,
@@ -62,11 +80,23 @@ const generateGalaxy = () => {
     /**
      * Points
      */
-    const points = new THREE.Points( geometry, material )
+    points = new THREE.Points( geometry, material )
     scene.add(points)
 }
 
 generateGalaxy()
+
+// const addDebug = () => {
+//     for(let key in parameters) {
+//         gui.add(parameters, `${key}`, parameters[key] / 10, parameters[key] * 10, parameters[key]).onFinishChange(generateGalaxy)
+//     }
+// }
+
+// addDebug()
+gui.add(parameters, 'count', 100, 1000000, 100).onFinishChange(generateGalaxy)
+gui.add(parameters, 'size', .001, .1, .001).onFinishChange(generateGalaxy)
+gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
 
 /**
  * Sizes
