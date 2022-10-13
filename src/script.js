@@ -27,6 +27,12 @@ const sphere = new THREE.Mesh(
 )
 
 /**
+ * Textures
+ */
+const textureLoader = new THREE.TextureLoader()
+const particles = textureLoader.load('./textures/particles/4.png')
+
+/**
  * Galaxy
  */
 const parameters = {
@@ -74,8 +80,8 @@ const generateGalaxy = () => {
         
         // Positions
         // const randomRadius = Math.random() * radius // original, makes star concentration uniform along branch length
-        const randomRadius = Math.pow(Math.random(), concentration) * radius + Math.pow(Math.random(), concentration) // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
         // const randomRadius = radius + Math.pow(Math.random(), concentration) // this creates stars chasing effect
+        const randomRadius = Math.pow(Math.random(), concentration) * radius + Math.pow(Math.random(), concentration) // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
@@ -83,15 +89,14 @@ const generateGalaxy = () => {
         const randomY = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * Math.random()
         const randomZ = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * Math.random()
 
+        // mess with these to make really cool effects
         const alternating = branchAngle < Math.PI ? 1 : -1
         const xPos = Math.cos(branchAngle + curvatureAngle) * randomRadius
         const yPos = Math.sin(randomRadius) * Math.cos(randomRadius) * alternating
         const zPos = Math.sin(branchAngle + curvatureAngle) * randomRadius
 
-        // mess with these to make really cool effects
         positions[i3 + 0] = xPos + randomX
         positions[i3 + 1] = yPos + randomY
-        // positions[i3 + 1] = (randomRadius + randomY) * (Math.random() < .5 ? 1 : -1)
         positions[i3 + 2] = zPos + randomZ
 
         // Colors
@@ -111,6 +116,8 @@ const generateGalaxy = () => {
         size,
         sizeAttenuation: true,
         depthWrite: false,
+        // transparent: true,
+        alphaMap: particles,
         blending: THREE.AdditiveBlending,
         vertexColors: true,
     })
