@@ -77,10 +77,13 @@ const generateGalaxy = () => {
         positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
 
         // Colors
-        
+        colors[i3 + 0] = 1
+        colors[i3 + 1] = 0
+        colors[i3 + 2] = 0
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
     /**
      * Material
