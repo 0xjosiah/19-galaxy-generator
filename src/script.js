@@ -34,7 +34,9 @@ const parameters = {
     branches: 3,
     curvature: 1,
     randomness: .02,
-    randomnessExp: 3, 
+    randomnessExp: 3,
+    insideColor: 0xff6030,
+    outsideColor: 0x1b3984,
 }
 
 let geometry;
@@ -108,6 +110,8 @@ gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
 gui.add(parameters, 'curvature', -5, 5, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'randomness', 0, 2, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'randomnessExp', 1, 10, .1).onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
 
 /**
  * Sizes
