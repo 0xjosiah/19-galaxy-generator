@@ -30,7 +30,7 @@ const sphere = new THREE.Mesh(
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particles = textureLoader.load('./textures/particles/4.png')
+const stars = textureLoader.load('./textures/particles/4.png')
 
 /**
  * Galaxy
@@ -117,7 +117,7 @@ const generateGalaxy = () => {
         sizeAttenuation: true,
         depthWrite: false,
         // transparent: true,
-        alphaMap: particles,
+        alphaMap: stars,
         blending: THREE.AdditiveBlending,
         vertexColors: true,
     })
