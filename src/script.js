@@ -34,6 +34,7 @@ const parameters = {
     branches: 3,
     curvature: 1,
     randomness: .02,
+    randomnessExp: 3, 
 }
 
 let geometry;
@@ -41,7 +42,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, randomness, } = parameters
+    const { count, size, radius, branches, curvature, randomness, randomnessExp, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -63,9 +64,9 @@ const generateGalaxy = () => {
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        const randomX = (Math.random() - .5) * randomness
-        const randomY = (Math.random() - .5) * randomness
-        const randomZ = (Math.random() - .5) * randomness
+        const randomX = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
+        const randomY = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
+        const randomZ = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
 
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
         positions[i3 + 1] = 0 + randomY
@@ -106,6 +107,7 @@ gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
 gui.add(parameters, 'curvature', -5, 5, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'randomness', 0, 2, .01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'randomnessExp', 1, 10, .1).onFinishChange(generateGalaxy)
 
 /**
  * Sizes
