@@ -32,7 +32,7 @@ const parameters = {
     size: .01,
     radius: 5,
     branches: 3,
-    spin: 1,
+    curvature: 1,
 
 }
 
@@ -99,7 +99,7 @@ gui.add(parameters, 'count', 100, 1000000, 100).onFinishChange(generateGalaxy)
 gui.add(parameters, 'size', .001, .1, .001).onFinishChange(generateGalaxy)
 gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
-gui.add(parameters, 'spin', -5, 5, .01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'curvature', -5, 5, .01).onFinishChange(generateGalaxy)
 
 /**
  * Sizes
