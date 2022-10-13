@@ -25,7 +25,6 @@ const sphere = new THREE.Mesh(
         roughness: .4,
     })
 )
-scene.add(sphere)
 
 /**
  * Galaxy
@@ -40,6 +39,7 @@ const parameters = {
     randomnessExp: 3,
     insideColor: 0xff6030,
     outsideColor: 0x1b3984,
+    blackHole: false,
 }
 
 let geometry;
@@ -47,13 +47,16 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, randomness, randomnessExp, insideColor, outsideColor, } = parameters
+    const { count, size, radius, branches, curvature, randomness, randomnessExp, insideColor, outsideColor, blackHole, } = parameters
 
     if(points) {
         geometry.dispose()
         material.dispose()
         scene.remove(points)
     }
+
+    if(blackHole) scene.add(sphere)
+    else scene.remove(sphere)
 
     /**
      * Geometry
@@ -80,9 +83,11 @@ const generateGalaxy = () => {
         const randomY = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1) * Math.random()
         const randomZ = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1) * Math.random()
 
+        let alternating = branchAngle < Math.PI ? 1 : -1
+
         // mess with these to make really cool effects
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
-        positions[i3 + 1] = 0 + randomY
+        positions[i3 + 1] = Math.sin(randomRadius) * Math.cos(randomRadius) * alternating + randomY
         // positions[i3 + 1] = (randomRadius + randomY) * (Math.random() < .5 ? 1 : -1)
         positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
 
@@ -132,6 +137,7 @@ gui.add(parameters, 'randomness', 0, 2, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'randomnessExp', 1, 10, .1).onFinishChange(generateGalaxy)
 gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
 gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
+gui.add(parameters, 'blackHole').onFinishChange(generateGalaxy)
 
 /**
  * Sizes
