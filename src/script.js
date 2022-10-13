@@ -67,7 +67,9 @@ const generateGalaxy = () => {
         const i3 = i * 3
         
         // Positions
-        const randomRadius = Math.random() * radius
+        // const randomRadius = Math.random() * radius
+        // const randomRadius = Math.random() * radius * Math.pow(Math.random(), randomnessExp)
+        const randomRadius = radius + Math.pow(Math.random(), randomnessExp) // this creates stars chasing effect
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
@@ -75,6 +77,7 @@ const generateGalaxy = () => {
         const randomY = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
         const randomZ = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
 
+        // mess with these to make really cool effects
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
         positions[i3 + 1] = 0 + randomY
         positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
