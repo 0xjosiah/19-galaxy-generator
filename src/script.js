@@ -33,7 +33,7 @@ const parameters = {
     radius: 5,
     branches: 3,
     curvature: 1,
-
+    randomness: .02,
 }
 
 let geometry;
@@ -41,7 +41,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, } = parameters
+    const { count, size, radius, branches, curvature, randomness, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -63,9 +63,13 @@ const generateGalaxy = () => {
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius
-        positions[i3 + 1] = 0
-        positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius
+        const randomX = Math.random() * randomness
+        const randomY = Math.random() * randomness
+        const randomZ = Math.random() * randomness
+
+        positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
+        positions[i3 + 1] = 0 + randomY
+        positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -101,6 +105,7 @@ gui.add(parameters, 'size', .001, .1, .001).onFinishChange(generateGalaxy)
 gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
 gui.add(parameters, 'curvature', -5, 5, .01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'randomness', 0, 2, .01).onFinishChange(generateGalaxy)
 
 /**
  * Sizes
