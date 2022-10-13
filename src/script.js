@@ -32,6 +32,7 @@ const parameters = {
     size: .01,
     radius: 5,
     branches: 3,
+    spin: 1,
 
 }
 
@@ -58,12 +59,12 @@ const generateGalaxy = () => {
 
         const i3 = i * 3
 
-        const randoRadius = Math.random() * radius
+        const randomRadius = Math.random() * radius
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        positions[i3 + 0] = Math.cos(branchAngle) * randoRadius
+        positions[i3 + 0] = Math.cos(branchAngle) * randomRadius
         positions[i3 + 1] = 0
-        positions[i3 + 2] = Math.sin(branchAngle) * randoRadius
+        positions[i3 + 2] = Math.sin(branchAngle) * randomRadius
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -98,6 +99,7 @@ gui.add(parameters, 'count', 100, 1000000, 100).onFinishChange(generateGalaxy)
 gui.add(parameters, 'size', .001, .1, .001).onFinishChange(generateGalaxy)
 gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
+gui.add(parameters, 'spin', -5, 5, .01).onFinishChange(generateGalaxy)
 
 /**
  * Sizes
