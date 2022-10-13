@@ -44,7 +44,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, randomness, randomnessExp, } = parameters
+    const { count, size, radius, branches, curvature, randomness, randomnessExp, insideColor, outsideColor, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -57,11 +57,13 @@ const generateGalaxy = () => {
      */
     geometry = new THREE.BufferGeometry()
     const positions = new Float32Array(count * 3)
+    const colors = new Float32Array(count * 3)
     
     for (let i = 0; i < count; i++) {
 
         const i3 = i * 3
-
+        
+        // Positions
         const randomRadius = Math.random() * radius
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
@@ -73,6 +75,9 @@ const generateGalaxy = () => {
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
         positions[i3 + 1] = 0 + randomY
         positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
+
+        // Colors
+        
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -84,7 +89,8 @@ const generateGalaxy = () => {
         size,
         sizeAttenuation: true,
         depthWrite: false,
-        blending: THREE.AdditiveBlending
+        blending: THREE.AdditiveBlending,
+        vertexColors: true,
     })
 
     /**
