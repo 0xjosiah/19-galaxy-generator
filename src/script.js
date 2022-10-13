@@ -16,7 +16,7 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
- * Test cube
+ * Black hole
  */
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(1, 64, 64),
