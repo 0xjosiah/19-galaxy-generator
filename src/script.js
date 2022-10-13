@@ -18,11 +18,14 @@ const scene = new THREE.Scene()
 /**
  * Test cube
  */
-// const cube = new THREE.Mesh(
-//     new THREE.BoxGeometry(1, 1, 1),
-//     new THREE.MeshBasicMaterial()
-// )
-// scene.add(cube)
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 64, 64),
+    new THREE.MeshStandardMaterial({
+        metalness: .8,
+        roughness: .4,
+    })
+)
+scene.add(sphere)
 
 /**
  * Galaxy
@@ -80,6 +83,7 @@ const generateGalaxy = () => {
         // mess with these to make really cool effects
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
         positions[i3 + 1] = 0 + randomY
+        // positions[i3 + 1] = (randomRadius + randomY) * (Math.random() < .5 ? 1 : -1)
         positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius + randomZ
 
         // Colors
