@@ -15,22 +15,21 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-/**
- * Black hole
- */
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 64, 64),
-    new THREE.MeshStandardMaterial({
-        metalness: .8,
-        roughness: .4,
-    })
-)
 
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
 const stars = textureLoader.load('./textures/particles/4.png')
+const spaceDust = textureLoader.load('./textures/particles/2.png')
+
+/**
+ * Black hole
+ */
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 64, 64),
+    new THREE.MeshStandardMaterial()
+)
 
 /**
  * Galaxy
@@ -131,13 +130,6 @@ const generateGalaxy = () => {
 
 generateGalaxy()
 
-// const addDebug = () => {
-//     for(let key in parameters) {
-//         gui.add(parameters, `${key}`, parameters[key] / 10, parameters[key] * 10, parameters[key]).onFinishChange(generateGalaxy)
-//     }
-// }
-
-// addDebug()
 gui.add(parameters, 'count', 100, 1000000, 100).onFinishChange(generateGalaxy)
 gui.add(parameters, 'size', .001, .1, .001).onFinishChange(generateGalaxy)
 gui.add(parameters, 'radius', .01, 20, .01).onFinishChange(generateGalaxy)
