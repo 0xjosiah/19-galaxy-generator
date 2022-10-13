@@ -41,7 +41,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, } = parameters
+    const { count, size, radius, branches, curvature, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -60,11 +60,12 @@ const generateGalaxy = () => {
         const i3 = i * 3
 
         const randomRadius = Math.random() * radius
+        const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        positions[i3 + 0] = Math.cos(branchAngle) * randomRadius
+        positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius
         positions[i3 + 1] = 0
-        positions[i3 + 2] = Math.sin(branchAngle) * randomRadius
+        positions[i3 + 2] = Math.sin(branchAngle + curvatureAngle) * randomRadius
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
