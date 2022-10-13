@@ -73,9 +73,9 @@ const generateGalaxy = () => {
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        const randomX = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
-        const randomY = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
-        const randomZ = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1)
+        const randomX = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1) * Math.random()
+        const randomY = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1) * Math.random()
+        const randomZ = Math.pow(Math.random(), randomnessExp) * (Math.random() < .5 ? 1 : -1) * Math.random()
 
         // mess with these to make really cool effects
         positions[i3 + 0] = Math.cos(branchAngle + curvatureAngle) * randomRadius + randomX
