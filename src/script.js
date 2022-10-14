@@ -40,11 +40,12 @@ const parameters = {
     radius: 5,
     branches: 3,
     curvature: 1,
-    randomness: .02,
+    randomness: .2,
     concentration: 3,
     innerColor: 0xff6030,
     outerColor: 0x1b3984,
     blackHole: false,
+    branchWaves: false,
 }
 
 let geometry;
@@ -52,7 +53,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, randomness, concentration, innerColor, outerColor, blackHole, } = parameters
+    const { count, size, radius, branches, curvature, randomness, concentration, innerColor, outerColor, blackHole, branchWaves, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -80,13 +81,14 @@ const generateGalaxy = () => {
         // Positions
         // const randomRadius = Math.random() * radius // original, makes star concentration uniform along branch length
         // const randomRadius = radius + Math.pow(Math.random(), concentration) // this creates stars chasing effect
-        const randomRadius = Math.pow(Math.random(), concentration) * radius + Math.pow(Math.random(), concentration) // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
+        const radiusMultiplier = radius + Math.pow(Math.random(), concentration)
+        const randomRadius = Math.pow(Math.random(), concentration) * radiusMultiplier // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
         const curvatureAngle = randomRadius * curvature
         const branchAngle = (i % branches) / branches * Math.PI * 2
 
-        const randomX = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius
-        const randomY = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius
-        const randomZ = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius
+        const randomX = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius// * Math.cos(randomRadius)
+        const randomY = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius// * Math.cos(randomRadius)
+        const randomZ = Math.pow(Math.random(), concentration) * (Math.random() < .5 ? 1 : -1) * randomness * randomRadius// * Math.cos(randomRadius)
 
         // mess with these to make really cool effects
         const alternating = branchAngle < Math.PI ? 1 : -1
@@ -95,7 +97,7 @@ const generateGalaxy = () => {
         const zPos = Math.sin(branchAngle + curvatureAngle) * randomRadius
 
         positions[i3 + 0] = xPos + randomX
-        positions[i3 + 1] = yPos + randomY
+        positions[i3 + 1] = branchWaves ? yPos + randomY : randomY
         positions[i3 + 2] = zPos + randomZ
 
         // Colors
@@ -140,6 +142,7 @@ gui.add(parameters, 'concentration', 1, 10, .1).onFinishChange(generateGalaxy)
 gui.addColor(parameters, 'innerColor').onFinishChange(generateGalaxy)
 gui.addColor(parameters, 'outerColor').onFinishChange(generateGalaxy)
 gui.add(parameters, 'blackHole').onFinishChange(generateGalaxy)
+gui.add(parameters, 'branchWaves').onFinishChange(generateGalaxy)
 
 /**
  * Sizes
