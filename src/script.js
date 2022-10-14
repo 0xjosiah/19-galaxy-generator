@@ -21,7 +21,7 @@ const scene = new THREE.Scene()
  */
 const textureLoader = new THREE.TextureLoader()
 const stars = textureLoader.load('./textures/particles/4.png')
-const spaceDust = textureLoader.load('./textures/particles/2.png')
+const spaceDust = textureLoader.load('./textures/particles/12.png')
 
 /**
  * Black hole
@@ -143,6 +143,57 @@ gui.addColor(parameters, 'innerColor').onFinishChange(generateGalaxy)
 gui.addColor(parameters, 'outerColor').onFinishChange(generateGalaxy)
 gui.add(parameters, 'blackHole').onFinishChange(generateGalaxy)
 gui.add(parameters, 'branchWaves').onFinishChange(generateGalaxy)
+
+/**
+ * Backdrop
+ */
+const generateBackdrop = () => {
+    let count = 30000
+
+    const geometry = new THREE.BufferGeometry()
+    const positions = new Float32Array(count * 3)
+    const colors = new Float32Array(count * 3)
+
+    for (let i = 0; i < count; i++) {
+
+        const i3 = i * 3
+        
+        // Positions
+        positions[i3 + 0] = (Math.random() - .5) * 75
+        positions[i3 + 1] = (Math.random() - .5) * 75
+        positions[i3 + 2] = (Math.random() - .5) * 75
+
+        // Colors
+        colors[i3 + 0] = Math.random()
+        colors[i3 + 1] = Math.random()
+        colors[i3 + 2] = Math.random()
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+
+    /**
+     * Material
+     */
+    const material = new THREE.PointsMaterial({
+        size: .04,
+        sizeAttenuation: true,
+        depthWrite: false,
+        // transparent: true,
+        alphaMap: spaceDust,
+        blending: THREE.AdditiveBlending,
+        vertexColors: true,
+        // color: 0xffffff
+    })
+
+    /**
+     * Points
+     */
+    const points = new THREE.Points( geometry, material )
+    scene.add(points)
+}
+
+generateBackdrop()
 
 /**
  * Sizes
