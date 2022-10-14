@@ -42,8 +42,8 @@ const parameters = {
     curvature: 1,
     randomness: .02,
     concentration: 3,
-    insideColor: 0xff6030,
-    outsideColor: 0x1b3984,
+    innerColor: 0xff6030,
+    outerColor: 0x1b3984,
     blackHole: false,
 }
 
@@ -52,7 +52,7 @@ let material;
 let points;
 
 const generateGalaxy = () => {
-    const { count, size, radius, branches, curvature, randomness, concentration, insideColor, outsideColor, blackHole, } = parameters
+    const { count, size, radius, branches, curvature, randomness, concentration, innerColor, outerColor, blackHole, } = parameters
 
     if(points) {
         geometry.dispose()
@@ -70,8 +70,8 @@ const generateGalaxy = () => {
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
 
-    const colorInside = new THREE.Color(insideColor)
-    const colorOutside = new THREE.Color(outsideColor)
+    const colorInside = new THREE.Color(innerColor)
+    const colorOutside = new THREE.Color(outerColor)
     
     for (let i = 0; i < count; i++) {
 
@@ -137,8 +137,8 @@ gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
 gui.add(parameters, 'curvature', -5, 5, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'randomness', 0, 2, .01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'concentration', 1, 10, .1).onFinishChange(generateGalaxy)
-gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
-gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'innerColor').onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'outerColor').onFinishChange(generateGalaxy)
 gui.add(parameters, 'blackHole').onFinishChange(generateGalaxy)
 
 /**
