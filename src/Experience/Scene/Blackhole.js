@@ -5,6 +5,9 @@ export default class Blackhole {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.debug = this.experience.debug
+
+        this.debugFolder = this.debug.ui.addFolder('Black hole')
 
         this.setGeometry()
         this.setMaterial()
@@ -22,6 +25,12 @@ export default class Blackhole {
 
     setMesh() {
         this.instance = new THREE.Mesh( this.geometry, this.material )
-        this.scene.add(this.instance)
+        
+        const debugObj = { on: true }
+        this.debugFolder.add(debugObj, 'on')
+        
+        if(debugObj.on) this.scene.add(this.instance)
+        else this.scene.remove(this.instance)
+
     }
 }
