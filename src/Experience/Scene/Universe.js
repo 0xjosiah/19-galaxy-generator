@@ -5,12 +5,10 @@ export default class Universe {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.resources = this.experience.resources
 
-        const testBox = new THREE.Mesh(
-            new THREE.BoxGeometry(),
-            new THREE.MeshBasicMaterial()
-        )
-
-        this.scene.add(testBox)
+        this.resources.on('ready', () => {
+            console.log('scene ready to display');
+        })
     }
 }
