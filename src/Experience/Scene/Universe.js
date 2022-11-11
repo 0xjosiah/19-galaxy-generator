@@ -14,7 +14,7 @@ export default class Universe {
 
         this.resources.on('ready', () => {
             this.backdrop = new Backdrop(this.backdropStarsCount)
-            this.blackHole = new BlackHole()
+            // this.blackHole = new BlackHole()
             this.galaxy = new Galaxy()
         })
     }

@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience'
+import BlackHole from './BlackHole'
 
 export default class Galaxy {
     
@@ -14,8 +15,12 @@ export default class Galaxy {
             concentration: 3,
             innerColor: 0xff6030,
             outerColor: 0x1b3984,
-            blackHole: false,
-            branchWaves: false,
+            blackHole: true,
+            branchWaves: true,
+        }
+
+        if(parameters.blackHole) {
+            this.blackHole = new BlackHole()
         }
 
         this.count = parameters.count
@@ -27,7 +32,6 @@ export default class Galaxy {
         this.concentration = parameters.concentration
         this.innerColor = parameters.innerColor
         this.outerColor = parameters.outerColor
-        this.blackHole = parameters.blackHole
         this.branchWaves = parameters.branchWaves
 
         this.experience = new Experience()
@@ -42,7 +46,6 @@ export default class Galaxy {
         this.colorOutside = new THREE.Color(this.outerColor)
 
         this.setRandomAttributes()
-
         this.setMaterial()
         this.setPoints()
     }
