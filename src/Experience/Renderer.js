@@ -21,7 +21,7 @@ export default class Renderer {
         this.instance.toneMapping = THREE.CineonToneMapping
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor(0x211d20)
+        // this.instance.setClearColor(0x211d20)
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }

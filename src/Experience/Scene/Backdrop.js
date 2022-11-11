@@ -35,7 +35,7 @@ export default class Backdrop {
 
     setMaterial() {
         this.material = new THREE.PointsMaterial({
-            size: .04,
+            size: .1,
             sizeAttenuation: true,
             depthWrite: false,
             alphaMap: this.resources.items.spaceDust,
