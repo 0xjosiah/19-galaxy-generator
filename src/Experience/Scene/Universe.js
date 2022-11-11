@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import Backdrop from './Backdrop'
 import Experience from '../Experience'
 
 export default class Universe {
@@ -8,7 +9,7 @@ export default class Universe {
         this.resources = this.experience.resources
 
         this.resources.on('ready', () => {
-            console.log('scene ready to display');
+            this.backdrop = new Backdrop()
         })
     }
 }
