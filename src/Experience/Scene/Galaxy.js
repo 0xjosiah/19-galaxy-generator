@@ -41,18 +41,19 @@ export default class Galaxy {
         this.colorInside = new THREE.Color(this.innerColor)
         this.colorOutside = new THREE.Color(this.outerColor)
 
-        this.setPositions()
-        this.setColors()
+        this.setRandomAttributes()
 
         this.setMaterial()
         this.setPoints()
     }
 
-    setPositions() {
+    setRandomAttributes() {
         for(let i = 0; i < this.count; i++) {
             const i3 = i * 3
             const radiusMultiplier = this.radius + Math.pow(Math.random(), this.concentration)
             const randomRadius = Math.pow(Math.random(), this.concentration) * radiusMultiplier // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
+            
+            // Positions
             const curvatureAngle = randomRadius * this.curvature
             const branchAngle = (i % this.branches) / this.branches * Math.PI * 2
 
@@ -69,21 +70,15 @@ export default class Galaxy {
             this.positions[i3 + 0] = xPos + randomX
             this.positions[i3 + 1] = this.branchWaves ? yPos + randomY : randomY
             this.positions[i3 + 2] = zPos + randomZ
-        }
-        this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3))
-    }
 
-    setColors() {
-        for(let i = 0; i < this.count; i++) {
-            const i3 = i * 3
-            const radiusMultiplier = this.radius + Math.pow(Math.random(), this.concentration)
-            const randomRadius = Math.pow(Math.random(), this.concentration) * radiusMultiplier // this concentrates stars toward center of branches, adding addt'l math.pow helps prevent cross formation in center
+            // Colors
             const mixedColor = this.colorInside.clone().lerp(this.colorOutside, randomRadius / this.radius)
             this.colors[i3 + 0] = mixedColor.r
             this.colors[i3 + 1] = mixedColor.g
             this.colors[i3 + 2] = mixedColor.b
         }
         this.geometry.setAttribute('color', new THREE.BufferAttribute(this.colors, 3))
+        this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3))
     }
 
     setMaterial() {
