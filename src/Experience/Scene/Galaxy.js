@@ -4,21 +4,7 @@ import BlackHole from './BlackHole'
 
 export default class Galaxy {
     
-    constructor() {
-        const parameters = {
-            count: 100000,
-            size: .01,
-            radius: 5,
-            branches: 3,
-            curvature: 1,
-            randomness: .2,
-            concentration: 3,
-            innerColor: 0xff6030,
-            outerColor: 0x1b3984,
-            blackHole: true,
-            branchWaves: true,
-            starSelect: 4,
-        }
+    constructor(parameters) {
 
         if(parameters.blackHole) {
             this.blackHole = new BlackHole()
@@ -34,7 +20,7 @@ export default class Galaxy {
         this.innerColor = parameters.innerColor
         this.outerColor = parameters.outerColor
         this.branchWaves = parameters.branchWaves
-        this.starSelect = parameters.starSelect
+        this.starShape = parameters.starShape
 
         this.experience = new Experience()
         this.resources = this.experience.resources
@@ -87,8 +73,8 @@ export default class Galaxy {
     }
 
     setMaterial() {
-        const stars = this.resources.items[`stars${this.starSelect}`]
-        
+        const stars = this.resources.items[`stars${this.starShape}`]
+
         this.material = new THREE.PointsMaterial({
             size: this.size,
             sizeAttenuation: true,
