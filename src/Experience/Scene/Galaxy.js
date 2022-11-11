@@ -17,6 +17,7 @@ export default class Galaxy {
             outerColor: 0x1b3984,
             blackHole: true,
             branchWaves: true,
+            starSelect: 4,
         }
 
         if(parameters.blackHole) {
@@ -33,6 +34,7 @@ export default class Galaxy {
         this.innerColor = parameters.innerColor
         this.outerColor = parameters.outerColor
         this.branchWaves = parameters.branchWaves
+        this.starSelect = parameters.starSelect
 
         this.experience = new Experience()
         this.resources = this.experience.resources
@@ -85,11 +87,13 @@ export default class Galaxy {
     }
 
     setMaterial() {
+        const stars = this.resources.items[`stars${this.starSelect}`]
+        
         this.material = new THREE.PointsMaterial({
             size: this.size,
             sizeAttenuation: true,
             depthWrite: false,
-            alphaMap: this.resources.items.stars,
+            alphaMap: stars,
             blending: THREE.AdditiveBlending,
             vertexColors: true
         })
