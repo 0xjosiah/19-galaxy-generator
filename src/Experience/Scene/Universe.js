@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Backdrop from './Backdrop'
 import Experience from '../Experience'
+import Blackhole from './Blackhole'
 
 export default class Universe {
     constructor() {
@@ -12,6 +13,7 @@ export default class Universe {
 
         this.resources.on('ready', () => {
             this.backdrop = new Backdrop(this.backdropStarsCount)
+            this.blackhole = new Blackhole()
         })
     }
 }
