@@ -4,7 +4,22 @@ import BlackHole from './BlackHole'
 
 export default class Galaxy {
     
-    constructor(parameters) {
+    constructor() {
+        const parameters = {
+            count: 100000,
+            size: .01,
+            radius: 5,
+            branches: 3,
+            curvature: 1,
+            randomness: .2,
+            concentration: 3,
+            innerColor: 0xff6030,
+            outerColor: 0x1b3984,
+            blackHole: true,
+            branchWaves: true,
+            starShape: 4,
+            backdropStarsCount: 10000
+        }
 
         if(parameters.blackHole) {
             this.blackHole = new BlackHole()
