@@ -2,8 +2,8 @@ import * as THREE from 'three'
 import Experience from "../Experience";
 
 export default class Backdrop {
-    constructor(count) {
-        this.count = count
+    constructor() {
+        this.count = 10000
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources

@@ -10,7 +10,7 @@ export default class Universe {
         this.resources = this.experience.resources
 
         this.resources.on('ready', () => {
-            this.backdrop = new Backdrop(10000)
+            this.backdrop = new Backdrop()
             this.galaxy = new Galaxy()
         })
     }
