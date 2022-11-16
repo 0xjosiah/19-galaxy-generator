@@ -21,7 +21,7 @@ export default class Universe {
             concentration: 3,
             innerColor: 0xff6030,
             outerColor: 0x1b3984,
-            blackHole: true,
+            isBlackHole: false,
             branchWaves: true,
             starShape: 4,
             backdropStarsCount: 10000
@@ -59,7 +59,7 @@ export default class Universe {
         this.debugFolder.addColor(this.parameters, 'outerColor').onFinishChange(() => {
             this.galaxy = this.galaxy.updateGalaxy(this.parameters)
         })
-        this.debugFolder.add(this.parameters, 'blackHole').onFinishChange(() => {
+        this.debugFolder.add(this.parameters, 'isBlackHole').onFinishChange(() => {
             this.galaxy = this.galaxy.updateGalaxy(this.parameters)
         })
         this.debugFolder.add(this.parameters, 'branchWaves').onFinishChange(() => {

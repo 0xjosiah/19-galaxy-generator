@@ -21,10 +21,6 @@ export default class Galaxy {
         //     backdropStarsCount: 10000
         // }
 
-        if(parameters.blackHole) {
-            this.blackHole = new BlackHole()
-        }
-
         this.count = parameters.count
         this.size = parameters.size
         this.radius = parameters.radius
@@ -35,6 +31,7 @@ export default class Galaxy {
         this.innerColor = parameters.innerColor
         this.outerColor = parameters.outerColor
         this.branchWaves = parameters.branchWaves
+        this.isBlackHole = parameters.isBlackHole
         this.starShape = parameters.starShape
 
         this.experience = new Experience()
@@ -49,6 +46,7 @@ export default class Galaxy {
         this.colorOutside = new THREE.Color(this.outerColor)
 
         this.setRandomAttributes()
+        this.setBlackHole()
         this.setMaterial()
         this.setPoints()
     }
@@ -105,11 +103,18 @@ export default class Galaxy {
         this.scene.add(this.points)
     }
 
+    setBlackHole() {
+        if(this.isBlackHole) {
+            this.blackHole = new BlackHole()
+        }
+        // this.scene.add(this.blackHole)
+    }
+
     updateGalaxy(parameters) {
         this.geometry.dispose()
         this.material.dispose()
         this.scene.remove(this.points)
-        if(this.blackHole) this.scene.remove(this.blackHole)
+        if(this.blackHole) this.scene.remove(this.blackHole.instance)
 
         // this = new Galaxy(parameters)
         return new Galaxy(parameters)
