@@ -68,5 +68,45 @@ export default [
         name: 'spaceDust',
         type: 'texture',
         path: 'textures/particles/12.png'
+    },
+    {
+        name: 'matcap1',
+        type: 'texture',
+        path: 'textures/matcaps/1.png'
+    },
+    {
+        name: 'matcap2',
+        type: 'texture',
+        path: 'textures/matcaps/2.png'
+    },
+    {
+        name: 'matcap3',
+        type: 'texture',
+        path: 'textures/matcaps/3.png'
+    },
+    {
+        name: 'matcap4',
+        type: 'texture',
+        path: 'textures/matcaps/4.png'
+    },
+    {
+        name: 'matcap5',
+        type: 'texture',
+        path: 'textures/matcaps/5.png'
+    },
+    {
+        name: 'matcap6',
+        type: 'texture',
+        path: 'textures/matcaps/6.png'
+    },
+    {
+        name: 'matcap7',
+        type: 'texture',
+        path: 'textures/matcaps/7.png'
+    },
+    {
+        name: 'matcap8',
+        type: 'texture',
+        path: 'textures/matcaps/8.png'
     }
 ]
