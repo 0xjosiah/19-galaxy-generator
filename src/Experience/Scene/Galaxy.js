@@ -125,6 +125,6 @@ export default class Galaxy {
 
     groupGalaxy() {
         this.group = new THREE.Group()
-        this.group.add(this.points, this.blackHole)
+        this.group.add(this.points, this.blackHole.instance)
     }
 }
