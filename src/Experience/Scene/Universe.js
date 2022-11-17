@@ -1,4 +1,4 @@
-import Backdrop1 from './Backdrop1'
+import Backdrop from './Backdrop'
 import Experience from '../Experience'
 import Galaxy from './Galaxy'
 
@@ -41,7 +41,7 @@ export default class Universe {
         this.debugFolder.add(this.parameters, 'starShape', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]).onFinishChange(() => this.galaxies[this.galaxyCount].updateGalaxy())
 
         this.resources.on('ready', () => {
-            this.backdrop = new Backdrop1()
+            this.backdrop = new Backdrop()
             this.addGalaxy()
         })
 
