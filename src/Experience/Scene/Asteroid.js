@@ -8,7 +8,7 @@ export default class Asteroid {
         this.resources = this.experience.resources
 
         this.geometry = new THREE.OctahedronGeometry(.01, 0)
-        this.material = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.matcap3 })
+        this.material = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.asteroidTexture })
 
         this.instance = new THREE.Mesh( this.geometry, this.material )
 

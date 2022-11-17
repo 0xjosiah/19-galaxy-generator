@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import Experience from "../Experience";
 import Asteroid from './Asteroid';
 
