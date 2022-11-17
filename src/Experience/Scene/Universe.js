@@ -10,10 +10,12 @@ export default class Universe {
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.debugFolder = this.debug.ui.addFolder('Galaxy Placement')
+        this.galaxies = {}
+        this.galaxyCount = 0
 
         this.resources.on('ready', () => {
             this.backdrop = new Backdrop1()
-            this.galaxy = new Galaxy()
+            this.addGalaxy()
         })
 
         const debugObj = {
@@ -22,15 +24,22 @@ export default class Universe {
         this.debugFolder.add(debugObj, 'placeGalaxy')
     }
 
+    addGalaxy() {
+        this.galaxyCount++
+        this.galaxies[this.galaxyCount] = new Galaxy()
+        console.log(this.galaxies[this.galaxyCount])
+        console.log(this.galaxies[this.galaxyCount].points)
+    }
+
     locationGenerator() {
-        return (Math.random() - .5) * 75
+        let location = (Math.random() - .5) * 75
+        if(Math.abs(location) < this.galaxies[this.galaxyCount].parameters.radius) location -= this.galaxies[this.galaxyCount].parameters.radius
+        return location
     }
 
     placeGalaxy() {
-        this.galaxy.groupGalaxy()
-        let location = this.locationGenerator()
-        if(location < this.galaxy.parameters.radius) location += this.galaxy.parameters.radius
-        this.galaxy.group.position.set( location, location, location )
-        this.galaxy = new Galaxy()
+        const location = this.locationGenerator()
+        this.galaxies[this.galaxyCount].group.position.set( location, location, location )
+        this.addGalaxy()
     }
 }

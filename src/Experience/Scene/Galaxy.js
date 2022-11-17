@@ -43,6 +43,7 @@ export default class Galaxy {
         this.setBlackHole()
         this.setMaterial()
         this.setPoints()
+        this.setGroup()
     }
 
     setGeometry() {
@@ -123,8 +124,9 @@ export default class Galaxy {
 
     }
 
-    groupGalaxy() {
+    setGroup() {
         this.group = new THREE.Group()
         this.group.add(this.points, this.blackHole.instance)
+        this.scene.add(this.group)
     }
 }
