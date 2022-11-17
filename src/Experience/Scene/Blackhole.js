@@ -5,7 +5,6 @@ export default class BlackHole {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
-        this.debug = this.experience.debug
 
         this.setGeometry()
         this.setMaterial()

@@ -48,7 +48,7 @@ export default class Universe {
         const debugObj = {
             placeGalaxy: () => this.placeGalaxy()
         }
-        this.debugFolder.add(debugObj, 'placeGalaxy')
+        this.debugFolder.add(debugObj, 'placeGalaxy').name('Place Galaxy')
 
         // this.axesHelper = new THREE.AxesHelper(5)
         // this.scene.add(this.axesHelper)
