@@ -43,6 +43,7 @@ export default class Universe {
     }
 
     placeGalaxy() {
+        this.galaxies[this.galaxyCount].setGroup()
         this.galaxies[this.galaxyCount].group.position.set( this.locationGenerator(), this.locationGenerator(), this.locationGenerator() )
         this.galaxies[this.galaxyCount].group.rotation.x = Math.random() * Math.PI
         this.addGalaxy()
