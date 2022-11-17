@@ -4,7 +4,7 @@ import Asteroid from './Asteroid';
 
 export default class Backdrop1 {
     constructor() {
-        this.count = 10000
+        this.count = 1000
         this.experience = new Experience()
         this.scene = this.experience.scene
 
