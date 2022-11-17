@@ -22,6 +22,9 @@ export default class Universe {
             placeGalaxy: () => this.placeGalaxy()
         }
         this.debugFolder.add(debugObj, 'placeGalaxy')
+
+        // this.axesHelper = new THREE.AxesHelper(5)
+        // this.scene.add(this.axesHelper)
     }
 
     addGalaxy() {
@@ -33,13 +36,17 @@ export default class Universe {
 
     locationGenerator() {
         let location = (Math.random() - .5) * 75
-        if(Math.abs(location) < this.galaxies[this.galaxyCount].parameters.radius) location -= this.galaxies[this.galaxyCount].parameters.radius
+        if(Math.abs(location) < this.galaxies[this.galaxyCount].parameters.radius) {
+            (Math.random() - .5) > 0 
+            ? location -= this.galaxies[this.galaxyCount].parameters.radius
+            : location += this.galaxies[this.galaxyCount].parameters.radius
+        }
         return location
     }
 
     placeGalaxy() {
-        const location = this.locationGenerator()
-        this.galaxies[this.galaxyCount].group.position.set( location, location, location )
+        this.galaxies[this.galaxyCount].group.position.set( this.locationGenerator(), this.locationGenerator(), this.locationGenerator() )
+        this.galaxies[this.galaxyCount].group.rotation.x = Math.random() * Math.PI
         this.addGalaxy()
     }
 }

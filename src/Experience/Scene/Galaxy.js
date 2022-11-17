@@ -10,7 +10,8 @@ export default class Galaxy {
         this.resources = this.experience.resources
         this.scene = this.experience.scene
         this.debug = this.experience.debug
-        this.debugFolder = this.debug.ui.addFolder('Galaxy')
+        this.code = this.experience.universe.galaxyCount
+        this.debugFolder = this.debug.ui.addFolder(`Galaxy ${this.code}`)
 
         this.parameters = {}
         this.parameters.count = 100000
