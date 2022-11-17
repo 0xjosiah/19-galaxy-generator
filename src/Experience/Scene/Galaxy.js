@@ -111,7 +111,7 @@ export default class Galaxy {
             this.blackHole = new BlackHole()
         }
         if(this.parameters.isBlackHole && this.blackHole) {
-            this.scene.add(this.blackHole)
+            this.scene.add(this.blackHole.instance)
         }
         // if(!this.parameters.isBlackHole) return
     }
