@@ -107,9 +107,13 @@ export default class Galaxy {
     }
 
     setBlackHole() {
-        if(this.parameters.isBlackHole) {
+        if(this.parameters.isBlackHole && !this.blackHole) {
             this.blackHole = new BlackHole()
         }
+        if(this.parameters.isBlackHole && this.blackHole) {
+            this.scene.add(this.blackHole)
+        }
+        // if(!this.parameters.isBlackHole) return
     }
 
     updateGalaxy() {
@@ -128,7 +132,8 @@ export default class Galaxy {
 
     setGroup() {
         this.group = new THREE.Group()
-        this.group.add(this.points, this.blackHole.instance)
+        this.group.add(this.points)
+        if(this.parameters.isBlackHole) this.group.add(this.blackHole.instance)
         this.scene.add(this.group)
     }
 }
