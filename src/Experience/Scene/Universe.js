@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import Backdrop1 from './Backdrop1'
 import Experience from '../Experience'
 import Galaxy from './Galaxy'
@@ -9,11 +8,10 @@ export default class Universe {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.debugFolder = this.debug.ui.addFolder('Galaxy Placement')
         this.galaxies = {}
         this.galaxyCount = 0
         
-        this.debugFolder = this.debug.ui.addFolder(`Galaxy ${this.code}`)
+        this.debugFolder = this.debug.ui.addFolder('Galaxy Creator')
 
         this.parameters = {}
         this.parameters.count = 100000
