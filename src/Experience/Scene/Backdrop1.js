@@ -1,20 +1,29 @@
 import * as THREE from 'three'
 import Experience from "../Experience";
+import Asteroid from './Asteroid';
 
 export default class Backdrop1 {
     constructor() {
         this.count = 10000
         this.experience = new Experience()
         this.scene = this.experience.scene
-        this.resources = this.experience.resources
-        this.geometry = new THREE.OctahedronGeometry(.01, 0)
-        this.positions = new Float32Array(this.count * 3)
-        this.colors = new Float32Array(this.count * 3)
-        this.material = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.matcap3 })
 
-        // this.setPositions()
-        // this.setColors()
-        // this.setMaterial()
-        // this.setPoints()
+        this.setAsteroids()
+    }
+
+    setAsteroids() {
+        for(let i = 0; i < this.count; i++) {
+            const asteroid = new Asteroid()
+            asteroid.instance.position.set(
+                (Math.random() - .5) * 75,
+                (Math.random() - .5) * 75,
+                (Math.random() - .5) * 75
+            )
+            asteroid.instance.rotation.x = Math.random() * Math.PI
+            const randomScale = Math.random() * 2
+            asteroid.instance.scale.set(randomScale, randomScale, randomScale)
+
+            this.scene.add(asteroid.instance)
+        }
     }
 }
