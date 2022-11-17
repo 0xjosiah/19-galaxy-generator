@@ -30,8 +30,6 @@ export default class Universe {
     addGalaxy() {
         this.galaxyCount++
         this.galaxies[this.galaxyCount] = new Galaxy()
-        console.log(this.galaxies[this.galaxyCount])
-        console.log(this.galaxies[this.galaxyCount].points)
     }
 
     locationGenerator() {

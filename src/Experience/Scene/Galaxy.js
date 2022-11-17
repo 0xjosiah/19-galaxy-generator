@@ -44,7 +44,7 @@ export default class Galaxy {
         this.setBlackHole()
         this.setMaterial()
         this.setPoints()
-        this.setGroup()
+        // this.setGroup()
     }
 
     setGeometry() {
@@ -122,6 +122,7 @@ export default class Galaxy {
         this.setBlackHole()
         this.setMaterial()
         this.setPoints()
+        // this.setGroup()
 
     }
 
